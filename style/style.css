@@ -1,0 +1,29 @@
+body {
+    padding: 0;
+    text-align: center;
+}
+
+.game-intro {
+    background-image: url("/images/background_intro_game_over.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+.game-intro > div {
+    display: flex;
+    justify-content: center;
+}
+
+#cat-img {
+    width: 250px;
+}
+
+#dog-img {
+    width: 250px;
+}
+
+#intro-order {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

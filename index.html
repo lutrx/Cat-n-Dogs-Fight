@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <title>Cat 'n Dogs Fight</title>
 </head>
 <body>
-    
+    <div class="game-intro">
+        <h1>Cat 'n Dogs Fight</h1>
+        <div>
+            <img id="cat-img" src="./images/cat.png" alt="cat" />
+            <img id="dog-img" src="./images/anger_bulldog_head_vector_logo.jpg" alt="dog" />
+        </div>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <div id="intro-order">
+            <button class="start-button">StartGame</button>
+            <h2>Welcome to the Cat 'n Dogs Fight Game!</h2>
+            <p>Use the left and right arrows to move the cat to catch all mice and avoid
+                the dogs. Use the space for shooting the dogs before they catch you!
+                </p>
+        </div>
+    </div>
+    <div class="game-board">
+        <canvas id="canvas" width="500" height="700"></canvas>
+    </div>
+    <div class="game-over">
+        <h1>GAME OVER!</h1>
+        <p>The dog got you!</p>
+        <p class="Score">Your Score: <span>0</span></p>
+        <button class="restart-button">Restart</button>
+    </div>
+    <script type="text/javascript" src="./js/index.js"></script>
 </body>
 </html>
