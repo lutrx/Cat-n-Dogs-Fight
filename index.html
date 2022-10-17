@@ -17,7 +17,7 @@
         <label for="name">Name:</label>
         <input type="text" id="name">
         <div id="intro-order">
-            <button class="start-button">StartGame</button>
+            <button class="start-button">Start Game</button>
             <h2>Welcome to the Cat 'n Dogs Fight Game!</h2>
             <p>Use the left and right arrows to move the cat to catch all mice and avoid
                 the dogs. Use the space for shooting the dogs before they catch you!
@@ -25,10 +25,13 @@
         </div>
     </div>
     <div class="game-board">
-        <canvas id="canvas" width="500" height="700"></canvas>
+        <canvas id="canvas" width="1000" height="900"></canvas>
     </div>
     <div class="game-over">
         <h1>GAME OVER!</h1>
+        <div>
+            <img id="dog-img" src="./images/anger_bulldog_head_vector_logo.jpg" alt="dog" />
+        </div>
         <p>The dog got you!</p>
         <p class="Score">Your Score: <span>0</span></p>
         <button class="restart-button">Restart</button>
