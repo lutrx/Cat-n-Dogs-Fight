@@ -12,6 +12,7 @@ const gameOverScreen = document.querySelector('.game-over');
 //Variables and constants needed for game performance
 let isGameOver = false;
 let gameId = 0;
+let Score = 0;
 
 //Cat variables
 const cat = new Image ();
@@ -68,10 +69,16 @@ const dogArr = [
   //Arrow variables
   const arrow = new Image ();
   arrow.src = '../images/ship_K.png';
-  let arrowWidth = 20;
-  let arrowHeight = 30;
-  let arrowX = catX + 60;
-  let arrowY = catY + 20;
+  let arrowWidth = 50;
+  let arrowHeight = 50;
+  let arrowY = 0;
+  let arrowX = 0;
+
+  const arrowArr = [
+    { x: arrowX, y: arrowY, img: arrow },
+  ]
+
+//Variables for movement
 
 let bgy = 0;
 let bgy2 = -canvas.width;
@@ -79,6 +86,9 @@ let bgy2 = -canvas.width;
 let isMovingLeft = false;
 let isMovingRight = false;
 let isSpacePressed = false;
+let isShooting = false;
+let intervalId = 0;
+let count = 0;
 
 //Functions
 
@@ -94,11 +104,11 @@ const moveCat = () => {
     }
 }
 
-const shootDog = () => {
-    if (isSpacePressed) {
-        ctx.drawImage(arrow, arrowX, arrowY, arrowWidth, arrowHeight);
-    }
+const pushArrows = (x,y) => {
+    arrowArr.push({x, y, img: arrow});
+    console.log(arrowArr);
 }
+
 
 //Game start
 window.onload = () => {
@@ -109,6 +119,7 @@ window.onload = () => {
     gameOverScreen.style.display = 'none';
     document.querySelector('.start-button').onclick = () => {
         startGame();
+        console.log("on click start",isGameOver)
     };
 
     document.addEventListener('keydown', (event) => {
@@ -127,25 +138,50 @@ window.onload = () => {
     document.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
             isSpacePressed = true;
+            arrowX = catX + 28;
+            arrowY = catY - 12;
+            isShooting = true;
+            //intervalId = setInterval(() => {
+                count += 1;
+            //}, 10);
+            console.log(count);
+            //if (count === 1 || count % 1000 === 0)
+            if (count === 1) {
+                pushArrows(arrowX, arrowY);
+                clearInterval(intervalId);
+            }
         }
     });
 
-    document.addEventListener('keyup', () => {
-        isSpacePressed = false;
+    document.addEventListener('keyup', (event) => {
+        if (event.code === 'Space') {
+            isSpacePressed = false;
+            count = 0;
+        }
     });
 
     document.querySelector('.restart-button').onclick = () => {
-        startGame();
-    }
+        isGameOver = false
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //startScreen.style.display = 'none';
+        //gameOverScreen.style.display = 'none';
+       // gameScreen.style.display = 'block';
+        //startScreen.style.display = "block"
+        //console.log("on restart btn ", isGameOver)
+       // startGame();
+    };
 
     function startGame() {
         startScreen.style.display = 'none';
+        gameOverScreen.style.display = 'none';
         ctx.drawImage(background, bgy, 0, canvas.width, canvas.height);
         //ctx.drawImage(background2, bgy2, 0, canvas.width, canvas.height);
         ctx.drawImage(cat, catX, catY, catWidth, catHeight);
+        //Draw Score:
+        ctx.font = '30px Arial';
+        ctx.fillText(`Score: ${Score}`, 50, 50);
 
         moveCat();
-        shootDog();
 
         //Dogs falling down
         for (let i = 0; i < dogArr.length; i += 1) {
@@ -153,7 +189,18 @@ window.onload = () => {
             ctx.drawImage(currentDog.img, currentDog.x, currentDog.y, dogWidth, dogHeight);
             currentDog.y += 3;
             if (currentDog.y > canvas.height) {
-              currentDog.y = -300;
+              currentDog.y = -500;
+            }
+            //Collision of cat with dog:
+            if (
+                currentDog.y + dogWidth - 20 > catY &&
+                catX + catWidth > currentDog.x &&
+                catX < currentDog.x + dogWidth &&
+                catY + dogHeight > currentDog.y
+            ) {
+            isGameOver = true;
+            gameScreen.style.display = 'none';
+            gameOverScreen.style.display = 'block';
             }
         }
 
@@ -163,9 +210,34 @@ window.onload = () => {
             ctx.drawImage(currentMouse.img, currentMouse.x, currentMouse.y, mouseWidth, mouseHeight);
             currentMouse.y += 3;
             if (currentMouse.y > canvas.height) {
-              currentMouse.y = -300;
+              currentMouse.y = -800;
+            }
+            //Collision of cat with mouse:
+            if (
+                currentMouse.y + mouseWidth > catY &&
+                catX + catWidth > currentMouse.x &&
+                catX < currentMouse.x + mouseWidth &&
+                catY + mouseHeight > currentMouse.y
+            ) {
+                currentMouse.y = -800;
+                Score += 10;
             }
         }
+
+        //Creating arrow movement:
+        for (let k = 0; k < arrowArr.length; k += 1) {
+            let currentArrow = arrowArr[k];
+            ctx.drawImage(currentArrow.img, currentArrow.x, currentArrow.y, arrowWidth, arrowHeight);
+            currentArrow.y -= 5;
+
+            //Check for collision with a dog:
+            
+        }
+
+      
+
+        
+
 
         if (isGameOver) {
             cancelAnimationFrame(gameId);
