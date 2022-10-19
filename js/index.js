@@ -44,7 +44,7 @@ const randomNumbersX = () => {
 }
 
 //Dog array of dogs
-const dogArr = [
+let dogArr = [
     { x: randomNumbersX(), y: -200, img: dog },
     { x: randomNumbersX(), y: -800, img: dog },
     { x: randomNumbersX(), y: -1200, img: dog },
@@ -58,7 +58,7 @@ const dogArr = [
   ];
 
   //Mouse array of mice
-  const mouseArr = [
+  let mouseArr = [
     { x: randomNumbersX(), y: -600, img: mouse },
     { x: randomNumbersX(), y: -1000, img: mouse },
     { x: randomNumbersX(), y: -1400, img: mouse },
@@ -75,7 +75,7 @@ const dogArr = [
   let arrowY = 0;
   let arrowX = 0;
 
-  const arrowArr = [
+  let arrowArr = [
     { x: arrowX, y: arrowY, img: arrow },
   ]
 
@@ -113,10 +113,6 @@ const pushArrows = (x,y) => {
 
 //Game start
 window.onload = () => {
-    //beides nach Styling rausnehmen:
-    //startScreen.style.display = 'none';
-    //gameScreen.style.display = 'none';
-    //nach Style wieder aktiv setzen:
     gameOverScreen.style.display = 'none';
     document.querySelector('.start-button').onclick = () => {
         startGame();
@@ -149,7 +145,7 @@ window.onload = () => {
             //if (count === 1 || count % 1000 === 0)
             if (count === 1) {
                 pushArrows(arrowX, arrowY);
-                clearInterval(intervalId);
+                //clearInterval(intervalId);
             }
         }
     });
@@ -164,17 +160,41 @@ window.onload = () => {
     document.querySelector('.restart-button').onclick = () => {
         isGameOver = false
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //startScreen.style.display = 'none';
-        //gameOverScreen.style.display = 'none';
-       // gameScreen.style.display = 'block';
-        //startScreen.style.display = "block"
-        //console.log("on restart btn ", isGameOver)
-       // startGame();
+        dogArr = [
+        { x: randomNumbersX(), y: -200, img: dog },
+        { x: randomNumbersX(), y: -800, img: dog },
+        { x: randomNumbersX(), y: -1200, img: dog },
+        { x: randomNumbersX(), y: -1600, img: dog },
+        { x: randomNumbersX(), y: -2000, img: dog },
+        { x: randomNumbersX(), y: -2400, img: dog },
+        { x: randomNumbersX(), y: -2800, img: dog },
+        { x: randomNumbersX(), y: -3200, img: dog },
+        { x: randomNumbersX(), y: -3600, img: dog },
+        { x: randomNumbersX(), y: -4000, img: dog },
+      ];
+    
+      
+        mouseArr = [
+        { x: randomNumbersX(), y: -600, img: mouse },
+        { x: randomNumbersX(), y: -1000, img: mouse },
+        { x: randomNumbersX(), y: -1400, img: mouse },
+        { x: randomNumbersX(), y: -1800, img: mouse },
+        { x: randomNumbersX(), y: -2200, img: mouse },
+        { x: randomNumbersX(), y: -2600, img: mouse },
+      ];
+
+        arrowArr = [
+        { x: -10, y: -10, img: arrow },
+      ];  
+
+        Score = 0;
+        startGame();
     };
 
     function startGame() {
         startScreen.style.display = 'none';
         gameOverScreen.style.display = 'none';
+        gameScreen.style.display = 'block';
         ctx.drawImage(background, bgy, 0, canvas.width, canvas.height);
         //ctx.drawImage(background2, bgy2, 0, canvas.width, canvas.height);
         ctx.drawImage(cat, catX, catY, catWidth, catHeight);
@@ -204,6 +224,28 @@ window.onload = () => {
             gameOverScreen.style.display = 'block';
             scoreOnGameOver.innerHTML = Score;
             }
+
+            for (let k = 0; k < arrowArr.length; k += 1) {
+                let currentArrow = arrowArr[k];
+                ctx.drawImage(currentArrow.img, currentArrow.x, currentArrow.y, arrowWidth, arrowHeight);
+                currentArrow.y -= 1;
+
+                //Collision of arrow with dog:
+                if (
+                    currentDog.y + dogWidth - 20 > currentArrow.y &&
+                    currentArrow.x + arrowWidth > currentDog.x &&
+                    currentArrow.x < currentDog.x + dogWidth &&
+                    currentArrow.y + dogHeight > currentDog.y &&
+                    currentDog.y > 0
+                ) {
+                    currentDog.y = -1000;
+                    arrowArr.splice(k, 1);
+                    Score += 20;
+                }
+            }
+
+            
+            
         }
 
         //Mice falling down
@@ -226,21 +268,7 @@ window.onload = () => {
             }
         }
 
-        //Creating arrow movement:
-        for (let k = 0; k < arrowArr.length; k += 1) {
-            let currentArrow = arrowArr[k];
-            ctx.drawImage(currentArrow.img, currentArrow.x, currentArrow.y, arrowWidth, arrowHeight);
-            currentArrow.y -= 5;
-
-            //Check for collision with a dog:
-            
-        }
-
-      
-
-        
-
-
+    
         if (isGameOver) {
             cancelAnimationFrame(gameId);
           } else {
