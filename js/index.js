@@ -8,6 +8,7 @@ background2.src = '../images/background_game.jpg';
 const startScreen = document.querySelector('.game-intro');
 const gameScreen = document.querySelector('.game-board');
 const gameOverScreen = document.querySelector('.game-over');
+let scoreOnGameOver = document.querySelector('.Score span');
 
 //Variables and constants needed for game performance
 let isGameOver = false;
@@ -201,6 +202,7 @@ window.onload = () => {
             isGameOver = true;
             gameScreen.style.display = 'none';
             gameOverScreen.style.display = 'block';
+            scoreOnGameOver.innerHTML = Score;
             }
         }
 
