@@ -1,4 +1,4 @@
-# Project's name
+# Cat n' Dogs Fight
 
 [Click here to see deployed game](http://github.com)
 
@@ -16,7 +16,8 @@ down to the bottom. A score is calculated according to the amount of shooted dog
 
 
 ## Backlog
-_List of features you might implement after the MVP_
+- boss feature: Bigger dog appearing 
+- High Score feature
 
 
 ## Data structure
@@ -24,7 +25,9 @@ _List of classes and methods_
 
 
 ## States y States Transitions
-_List of states (views) of your game_
+- Game Intro
+- Game Board
+- Game Over
 
 
 ## Task

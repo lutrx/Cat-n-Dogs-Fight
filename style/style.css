@@ -1,6 +1,9 @@
-body {
-    padding: 0;
+* {
     margin: 0;
+    padding: 0;
+}
+
+body {
     text-align: center;
     font-family:Verdana;
 }
@@ -13,6 +16,7 @@ body {
 
 .game-intro > h1 {
     font-size: 80px;
+    padding-top: 40px;
 }
 
 .game-intro > div {
@@ -22,16 +26,22 @@ body {
 
 #cat-img {
     width: 300px;
+    padding-top: 40px;
 }
 
 #dog-img {
     width: 300px;
+    padding-top: 40px;
 }
 
 #intro-order {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#intro-order > h2 {
+    margin-bottom: 30px;
 }
 
 
@@ -43,13 +53,14 @@ body {
     font-size: 30px;
     color: white;
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     background-color: cornflowerblue;
     border-radius: 10px;
 }
 
 .game-board {
-    padding: 20px 0px;
+    background-color: rgb(221, 160, 221, 0.7);
+    height: 100vh;
 }
 
 .game-over {
@@ -65,6 +76,7 @@ body {
 
 .game-over > p {
     font-size: 40px;
+    padding-top: 30px;
 }
 
 .restart-button {
@@ -73,7 +85,7 @@ body {
     align-self: center;
     font-size: 30px;
     color: white;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 20px;
     background-color: cornflowerblue;
     border-radius: 10px;

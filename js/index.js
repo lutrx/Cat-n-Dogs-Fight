@@ -3,12 +3,23 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const background = new Image ();
 background.src = '../images/background_game.jpg';
-const background2 = new Image ();
-background2.src = '../images/background_game.jpg';
 const startScreen = document.querySelector('.game-intro');
 const gameScreen = document.querySelector('.game-board');
 const gameOverScreen = document.querySelector('.game-over');
 let scoreOnGameOver = document.querySelector('.Score span');
+
+//Sound variables:
+const backgroundSong = new Audio ();
+backgroundSong.src = '../Sounds/background_sound_game.mp3';
+backgroundSong.volume = 0.3;
+const gameOverSound = new Audio ();
+gameOverSound.src = '../Sounds/gameOverSound.mp3';
+gameOverSound.volume = 0.5;
+const mouseSound = new Audio ();
+mouseSound.src = '../Sounds/catchMouse.mp3';
+mouseSound.volume = 0.9;
+const arrowSound = new Audio();
+arrowSound.src = '../Sounds/arrow.wav';
 
 //Variables and constants needed for game performance
 let isGameOver = false;
@@ -90,7 +101,6 @@ let dogArr = [
 //Variables for movement
 
 let bgy = 0;
-let bgy2 = -canvas.width;
 
 let isMovingLeft = false;
 let isMovingRight = false;
@@ -122,9 +132,10 @@ const pushArrows = (x,y) => {
 //Game start
 window.onload = () => {
     gameOverScreen.style.display = 'none';
+    gameScreen.style.display = 'none';
     document.querySelector('.start-button').onclick = () => {
         startGame();
-        console.log("on click start",isGameOver)
+        console.log(inputField);
     };
 
     document.addEventListener('keydown', (event) => {
@@ -202,10 +213,11 @@ window.onload = () => {
         startScreen.style.display = 'none';
         gameOverScreen.style.display = 'none';
         gameScreen.style.display = 'block';
+        backgroundSong.play();
         ctx.drawImage(background, bgy, 0, canvas.width, canvas.height);
-        //ctx.drawImage(background2, bgy2, 0, canvas.width, canvas.height);
         ctx.drawImage(cat, catX, catY, catWidth, catHeight);
         //Draw Score:
+        ctx.fillStyle = 'white';
         ctx.font = '30px Arial';
         ctx.fillText(`Score: ${Score}`, 50, 50);
 
@@ -241,14 +253,16 @@ window.onload = () => {
 
             //Collision of cat with dog:
             if (
-                currentDog.y + dogWidth - 20 > catY &&
-                catX + catWidth > currentDog.x &&
-                catX < currentDog.x + dogWidth &&
+                currentDog.y + dogWidth > catY &&
+                catX + catWidth - 30 > currentDog.x &&
+                catX < currentDog.x + dogWidth - 30 &&
                 catY + dogHeight > currentDog.y
             ) {
             isGameOver = true;
+            backgroundSong.pause();
             gameScreen.style.display = 'none';
             gameOverScreen.style.display = 'block';
+            gameOverSound.play();
             scoreOnGameOver.innerHTML = Score;
             }
 
@@ -266,6 +280,7 @@ window.onload = () => {
                     currentDog.y > 0
                 ) {
                     currentDog.y = -1000;
+                    arrowSound.play();
                     arrowArr.splice(k, 1);
                     Score += 20;
                 }
@@ -297,6 +312,7 @@ window.onload = () => {
             ) {
                 currentMouse.y = -800;
                 Score += 10;
+                mouseSound.play();
             }
         }
 
