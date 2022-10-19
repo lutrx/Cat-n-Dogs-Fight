@@ -43,18 +43,26 @@ const randomNumbersX = () => {
     return Math.random() * (canvas.width - 120 - 10) + 10;
 }
 
+const direction = () => {
+    return Math.floor(Math.random() * (2 - (-2)) + (-2));
+}
+
 //Dog array of dogs
 let dogArr = [
-    { x: randomNumbersX(), y: -200, img: dog },
-    { x: randomNumbersX(), y: -800, img: dog },
-    { x: randomNumbersX(), y: -1200, img: dog },
-    { x: randomNumbersX(), y: -1600, img: dog },
-    { x: randomNumbersX(), y: -2000, img: dog },
-    { x: randomNumbersX(), y: -2400, img: dog },
-    { x: randomNumbersX(), y: -2800, img: dog },
-    { x: randomNumbersX(), y: -3200, img: dog },
-    { x: randomNumbersX(), y: -3600, img: dog },
-    { x: randomNumbersX(), y: -4000, img: dog },
+    { x: randomNumbersX(), y: -200, img: dog, direct: direction()},
+    { x: randomNumbersX(), y: -800, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -1200, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -1600, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -2000, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -2400, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -2800, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -3200, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -3600, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -4000, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -4400, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -4800, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -5200, img: dog, direct: direction() },
+    { x: randomNumbersX(), y: -5600, img: dog, direct: direction() },
   ];
 
   //Mouse array of mice
@@ -138,14 +146,9 @@ window.onload = () => {
             arrowX = catX + 28;
             arrowY = catY - 12;
             isShooting = true;
-            //intervalId = setInterval(() => {
-                count += 1;
-            //}, 10);
-            console.log(count);
-            //if (count === 1 || count % 1000 === 0)
+            count += 1;
             if (count === 1) {
                 pushArrows(arrowX, arrowY);
-                //clearInterval(intervalId);
             }
         }
     });
@@ -161,17 +164,21 @@ window.onload = () => {
         isGameOver = false
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         dogArr = [
-        { x: randomNumbersX(), y: -200, img: dog },
-        { x: randomNumbersX(), y: -800, img: dog },
-        { x: randomNumbersX(), y: -1200, img: dog },
-        { x: randomNumbersX(), y: -1600, img: dog },
-        { x: randomNumbersX(), y: -2000, img: dog },
-        { x: randomNumbersX(), y: -2400, img: dog },
-        { x: randomNumbersX(), y: -2800, img: dog },
-        { x: randomNumbersX(), y: -3200, img: dog },
-        { x: randomNumbersX(), y: -3600, img: dog },
-        { x: randomNumbersX(), y: -4000, img: dog },
-      ];
+            { x: randomNumbersX(), y: -200, img: dog, direct: direction()},
+            { x: randomNumbersX(), y: -800, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -1200, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -1600, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -2000, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -2400, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -2800, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -3200, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -3600, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -4000, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -4400, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -4800, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -5200, img: dog, direct: direction() },
+            { x: randomNumbersX(), y: -5600, img: dog, direct: direction() },
+        ];
     
       
         mouseArr = [
@@ -181,7 +188,7 @@ window.onload = () => {
         { x: randomNumbersX(), y: -1800, img: mouse },
         { x: randomNumbersX(), y: -2200, img: mouse },
         { x: randomNumbersX(), y: -2600, img: mouse },
-      ];
+        ];
 
         arrowArr = [
         { x: -10, y: -10, img: arrow },
@@ -208,10 +215,30 @@ window.onload = () => {
         for (let i = 0; i < dogArr.length; i += 1) {
             let currentDog = dogArr[i];
             ctx.drawImage(currentDog.img, currentDog.x, currentDog.y, dogWidth, dogHeight);
-            currentDog.y += 3;
+            //Dog movement horizontally:
+            if (currentDog.y > 300 && currentDog.y < canvas.height && currentDog.x < canvas.width && currentDog.direct === 1) {
+                currentDog.x += 2;
+            } else if (currentDog.y > 300 && currentDog.y < canvas.height && currentDog.x < canvas.width && currentDog.direct === -1) {
+                currentDog.x -= 2;
+            }
+            
+            //Dog movement speed:
+            if (Score <= 200) {
+                currentDog.y += 4;
+            } else if (Score > 200 && Score < 400) {
+                currentDog.y += 6;
+            } else if (Score >= 400 && Score < 600) {
+                currentDog.y += 7.5;
+            } else if (Score >= 600) {
+                currentDog.y += 8.5;
+            }
             if (currentDog.y > canvas.height) {
               currentDog.y = -500;
+            } else if (currentDog.x > canvas.width) {
+                currentDog.x = randomNumbersX();
+                currentDog.y = -500;
             }
+
             //Collision of cat with dog:
             if (
                 currentDog.y + dogWidth - 20 > catY &&
@@ -243,16 +270,21 @@ window.onload = () => {
                     Score += 20;
                 }
             }
-
-            
-            
         }
 
         //Mice falling down
         for (let j = 0; j < mouseArr.length; j += 1) {
             let currentMouse = mouseArr[j];
             ctx.drawImage(currentMouse.img, currentMouse.x, currentMouse.y, mouseWidth, mouseHeight);
-            currentMouse.y += 3;
+            if (Score <= 200) {
+                currentMouse.y += 4;
+            } else if (Score > 200 && Score < 400) {
+                currentMouse.y += 6;
+            } else if (Score >= 400 && Score < 600) {
+                currentMouse.y += 7.5;
+            } else if (Score >= 600) {
+                currentMouse.y += 8.5;
+            }
             if (currentMouse.y > canvas.height) {
               currentMouse.y = -800;
             }
