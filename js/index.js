@@ -2,7 +2,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const background = new Image ();
-background.src = '../images/background_game.jpg';
+background.src = './images/background_game.jpg';
 const startScreen = document.querySelector('.game-intro');
 const gameScreen = document.querySelector('.game-board');
 const gameOverScreen = document.querySelector('.game-over');
@@ -10,16 +10,16 @@ let scoreOnGameOver = document.querySelector('.Score span');
 
 //Sound variables:
 const backgroundSong = new Audio ();
-backgroundSong.src = '../Sounds/background_sound_game.mp3';
+backgroundSong.src = './Sounds/background_sound_game.mp3';
 backgroundSong.volume = 0.3;
 const gameOverSound = new Audio ();
-gameOverSound.src = '../Sounds/gameOverSound.mp3';
+gameOverSound.src = './Sounds/gameOverSound.mp3';
 gameOverSound.volume = 0.5;
 const mouseSound = new Audio ();
-mouseSound.src = '../Sounds/catchMouse.mp3';
+mouseSound.src = './Sounds/catchMouse.mp3';
 mouseSound.volume = 0.9;
 const arrowSound = new Audio();
-arrowSound.src = '../Sounds/arrow.wav';
+arrowSound.src = './Sounds/arrow.wav';
 
 //Variables and constants needed for game performance
 let isGameOver = false;
@@ -28,7 +28,7 @@ let Score = 0;
 
 //Cat variables
 const cat = new Image ();
-cat.src = '../images/cat.png';
+cat.src = './images/cat.png';
 let catX = canvas.width - 500;
 let catY = canvas.height - 220;
 let catWidth = 120;
@@ -36,14 +36,14 @@ let catHeight = 150;
 
 //Dog variables:
 const dog = new Image ();
-dog.src = '../images/anger_bulldog_head_vector_logo.jpg';
+dog.src = './images/anger_bulldog_head_vector_logo.jpg';
 let dogWidth = 100;
 let dogHeight = 130;
 let dogY = 0;
 
 //Mouse variables:
 const mouse = new Image ();
-mouse.src = '../images/atrk_8u30_220329.jpg';
+mouse.src = './images/atrk_8u30_220329.jpg';
 let mouseWidth = 100;
 let mouseHeight = 130;
 let mouseY = 0;
@@ -88,7 +88,7 @@ let dogArr = [
 
   //Arrow variables
   const arrow = new Image ();
-  arrow.src = '../images/ship_K.png';
+  arrow.src = './images/ship_K.png';
   let arrowWidth = 50;
   let arrowHeight = 50;
   let arrowY = 0;
