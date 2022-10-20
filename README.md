@@ -53,6 +53,6 @@ index.js:
 ## Links
 
 - [Trello Link](https://trello.com/invite/b/ni5NpOje/ATTI785a20a3ab791d492b162a6c9b3dc0bf380D6DDA/project-1-ironhack)
-- [Slides Link](http://slides.com)
+- [Google Slides Link](https://docs.google.com/presentation/d/1VjMrwzpSb89X-_zEyMnzyaD-vuCzWjLw9z3dEaxKZBY/edit?usp=sharing)
 - [Github repository Link](https://github.com/lutrx/Cat-n-Dogs-Fight)
 - [Deployment Link](https://lutrx.github.io/Cat-n-Dogs-Fight/)
