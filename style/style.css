@@ -51,11 +51,19 @@ body {
     height: 50px;
     align-self: center;
     font-size: 30px;
-    color: white;
+    color: cornflowerblue;
     margin-top: 50px;
     margin-bottom: 40px;
-    background-color: cornflowerblue;
+    background-color: white;
     border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    box-shadow: 5px 5px cornflowerblue;
+}
+
+.start-button:hover {
+    background-color: cornflowerblue;
+    color: white;
+    box-shadow: none;
 }
 
 .game-board {
@@ -84,9 +92,17 @@ body {
     height: 50px;
     align-self: center;
     font-size: 30px;
-    color: white;
+    color: cornflowerblue;
     margin-top: 50px;
-    margin-bottom: 20px;
-    background-color: cornflowerblue;
+    margin-bottom: 40px;
+    background-color: white;
     border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    box-shadow: 5px 5px cornflowerblue;
+}
+
+.restart-button:hover {
+    background-color: cornflowerblue;
+    color: white;
+    box-shadow: none;
 }
