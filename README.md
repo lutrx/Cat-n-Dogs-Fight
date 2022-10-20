@@ -1,6 +1,6 @@
 # Cat n' Dogs Fight
 
-[Click here to see deployed game](http://github.com)
+[Click here to see deployed game](https://lutrx.github.io/Cat-n-Dogs-Fight/)
 
 ## Description
 Cat n' Dogs Fight is a game in which the player has to move a cat horizontally and shoot up incoming dogs which appear at the top of the game and move down to the bottom. 
@@ -21,7 +21,13 @@ down to the bottom. A score is calculated according to the amount of shooted dog
 
 
 ## Data structure
-_List of classes and methods_
+index.js:
+
+- randomXNumbers ();
+- direction ();
+- moveCat ();
+- pushArrows ();
+- startGame ();
 
 
 ## States y States Transitions
@@ -31,12 +37,22 @@ _List of classes and methods_
 
 
 ## Task
-_List of tasks in order of priority_
+- build game intro
+- build Game Screen
+- build Game Over Screen
+- build moveCat function
+- build falling items
+- build collision between cat and falling items
+- build shooting ability 
+- implement Score 
+- implement updated Score on Game Over Screen
+- implement sounds and music
+
 
 
 ## Links
 
-- [Trello Link](https://trello.com)
+- [Trello Link](https://trello.com/invite/b/ni5NpOje/ATTI785a20a3ab791d492b162a6c9b3dc0bf380D6DDA/project-1-ironhack)
 - [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
-- [Deployment Link](http://github.com)
+- [Github repository Link](https://github.com/lutrx/Cat-n-Dogs-Fight)
+- [Deployment Link](https://lutrx.github.io/Cat-n-Dogs-Fight/)
