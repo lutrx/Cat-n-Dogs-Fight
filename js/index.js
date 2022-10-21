@@ -171,6 +171,7 @@ window.onload = () => {
         }
     });
 
+
     document.querySelector('.restart-button').onclick = () => {
         isGameOver = false
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -214,6 +215,7 @@ window.onload = () => {
         gameOverScreen.style.display = 'none';
         gameScreen.style.display = 'block';
         backgroundSong.play();
+
         ctx.drawImage(background, bgy, 0, canvas.width, canvas.height);
         ctx.drawImage(cat, catX, catY, catWidth, catHeight);
         //Draw Score:
